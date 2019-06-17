@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8BB3D0D7-A556-44B4-9676-735FE1031EE8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>OmlUtilities</RootNamespace>
+    <AssemblyName>oml</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommandDotNet, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandDotNet.2.8.0\lib\netstandard2.0\CommandDotNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.6.103\lib\net45\FluentValidation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Humanizer, Version=2.5.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Humanizer.Core.2.5.16\lib\netstandard2.0\Humanizer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\AssemblyUtility.cs" />
+    <Compile Include="Core\AssemblyUtilityException.cs" />
+    <Compile Include="Core\Oml.cs" />
+    <Compile Include="Core\OmlFragmentWriter.cs" />
+    <Compile Include="Core\OmlHeader.cs" />
+    <Compile Include="Core\OmlFragmentReader.cs" />
+    <Compile Include="Core\PlatformVersion.cs" />
+    <Compile Include="OmlUtilities.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="ProgramWorker.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Libs\ICSharpCode.SharpZipLib.0.85.5.dll" />
+    <EmbeddedResource Include="Libs\Noemax.FastInfoset.4.1.5.dll" />
+    <EmbeddedResource Include="Libs\OutSystems.Common.10.0.303.0.dll" />
+    <EmbeddedResource Include="Libs\OutSystems.Common.9.1.603.0.dll" />
+    <EmbeddedResource Include="Libs\OutSystems.RuntimeCommon.10.0.303.0.dll" />
+    <EmbeddedResource Include="Libs\OutSystems.RuntimeCommon.9.1.603.0.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Libs\OutSystems.Common.11.0.520.0.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Libs\OutSystems.RuntimeCommon.11.0.520.0.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Libs\ICSharpCode.SharpZipLib.1.1.0.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Libs\Noemax.FastInfoset.Net4.18.14.5339.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Libs\System.ComponentModel.Annotations.dll" />
+    <EmbeddedResource Include="Libs\System.ComponentModel.Primitives.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Libs\CommandDotNet.dll" />
+    <EmbeddedResource Include="Libs\FluentValidation.dll" />
+    <EmbeddedResource Include="Libs\Humanizer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

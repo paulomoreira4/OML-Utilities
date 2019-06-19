@@ -12,8 +12,6 @@ In the command line, the platform version starts with the letter "O" followed th
 
 ## Usage Examples
 
-The examples below have <PlatformVersion> tags which must be replaced with the appropriate platform version.
-
 ### Export OML as XML
 
 ```

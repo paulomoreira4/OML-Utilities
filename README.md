@@ -14,7 +14,7 @@ In the command line, the platform version starts with the letter "O" followed th
 
 The examples below have <PlatformVersion> tags which must be replaced with the appropriate platform version.
 
-### Exporting OML as XML
+#### Export OML as XML
 
 ```
 oml Manipulate "<InputFilePath>" "<OutputFilePath>" <PlatformVersion> --format xml
@@ -26,7 +26,7 @@ This generates a XML file in the `OutputFilePath` destination containing all fra
 oml Manipulate "C:\MyModule.oml" "C:\MyModule.xml" O11
 ```
 
-### List supported platform versions
+#### List supported platform versions
 
 ```
 oml ShowPlatformVersions
@@ -46,7 +46,7 @@ Optionally, the `--latest` flag can be added as well for outputting only the hig
 oml ShowPlatformVersions --fullversion --latest
 ```
 
-### Showing header values
+#### Show header values
 
 ```
 oml ShowHeaders "<InputFilePath>" "<OutputFilePath>" <PlatformVersion>
@@ -58,7 +58,7 @@ Shows a list of headers and their respective values separated by comma (:). If d
 oml ShowHeaders "C:\MyModule.oml" O11 Name
 ```
 
-### Changing header values
+#### Change header values
 
 ```
 oml Manipulate "<InputFilePath>" "<OutputFilePath>" <PlatformVersion> -H "<HeaderName>:<HeaderValue>"
@@ -72,7 +72,7 @@ Multiple headers can be modified at once by repeating the `-H` option, e.g.:
 oml Manipulate "C:\MyModule.oml" "C:\MyModule_Edited.oml" O11 -H "Name:MyModule" -H "Description:This is my module."
 ```
 
-### Replace XML fragment
+#### Replace XML fragment
 
 ```
 oml Manipulate "<InputFilePath>" "<OutputFilePath>" <PlatformVersion> -F "<FragmentName>:<FragmentXmlContent>"

@@ -76,7 +76,25 @@ namespace OmlUtilities
                 AssemblyUtility.PlatformVersion = platformVersion ?? throw new Exception("Platform version \"" + version + "\" not recognized. Please run ShowPlatformVersions in order to list supported versions.");
             }
 
-            return new Oml(_GetStream(input, true));
+            Stream stream = _GetStream(input, true);
+
+            if (stream.CanSeek)
+            {
+                return new Oml(stream);
+            }
+            else
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                byte[] buffer = new byte[32 * 1024]; // 32K buffer for example
+                int bytesRead;
+                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    memoryStream.Write(buffer, 0, bytesRead);
+                }
+                memoryStream.Position = 0;
+
+                return new Oml(memoryStream);
+            }
         }
 
         [ApplicationMetadata(Description = "Displays a list of compatible platform versions.",
@@ -284,6 +302,7 @@ namespace OmlUtilities
             {
                 oml.Save(outputStream); // Export OML
             }
+
             outputStream.Close();
         }
     }

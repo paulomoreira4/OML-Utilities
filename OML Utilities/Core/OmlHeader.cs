@@ -6,26 +6,35 @@ namespace OmlUtilities.Core
     {
         public class OmlHeader
         {
+            /// <summary>
+            /// Assembly instance.
+            /// </summary>
             protected object _instance;
 
+            /// <summary>
+            /// Class representing the main headers of the OML, allowing value modifications.
+            /// </summary>
+            /// <param name="oml">OML instance from which the header belongs to.</param>
             public OmlHeader(Oml oml)
             {
                 _instance = AssemblyUtility.GetInstanceField<object>(oml._instance, "Header");
             }
 
-            [OmlHeader]
+            /// <summary>
+            /// Activation code header (read-only).
+            /// </summary>
+            [OmlHeader(IsReadOnly = true)]
             public string ActivationCode
             {
                 get
                 {
                     return AssemblyUtility.GetInstanceField<string>(_instance, "ActivationCode");
                 }
-                set
-                {
-                    AssemblyUtility.SetInstanceField(_instance, "ActivationCode", value);
-                }
             }
 
+            /// <summary>
+            /// Module name header.
+            /// </summary>
             [OmlHeader]
             public string Name
             {
@@ -39,6 +48,9 @@ namespace OmlUtilities.Core
                 }
             }
 
+            /// <summary>
+            /// Module description header.
+            /// </summary>
             [OmlHeader]
             public string Description
             {
@@ -52,6 +64,9 @@ namespace OmlUtilities.Core
                 }
             }
 
+            /// <summary>
+            /// Header representing the last time the module was modified.
+            /// </summary>
             [OmlHeader]
             public DateTime LastModifiedUTC
             {
@@ -65,6 +80,9 @@ namespace OmlUtilities.Core
                 }
             }
 
+            /// <summary>
+            /// Whether the module must open in recovery mode.
+            /// </summary>
             [OmlHeader]
             public bool NeedsRecover
             {
@@ -78,6 +96,9 @@ namespace OmlUtilities.Core
                 }
             }
 
+            /// <summary>
+            /// Module signature header (read-only).
+            /// </summary>
             [OmlHeader(IsReadOnly = true)]
             public string Signature
             {
@@ -87,6 +108,9 @@ namespace OmlUtilities.Core
                 }
             }
 
+            /// <summary>
+            /// Module service studio version header.
+            /// </summary>
             [OmlHeader]
             public Version Version
             {
@@ -100,6 +124,9 @@ namespace OmlUtilities.Core
                 }
             }
 
+            /// <summary>
+            /// Header containing the previous service studio version before the last upgrade. 
+            /// </summary>
             [OmlHeader]
             public Version LastUpgradeVersion
             {
@@ -113,8 +140,14 @@ namespace OmlUtilities.Core
                 }
             }
 
+            /// <summary>
+            /// Custom attribute for OML header parameters.
+            /// </summary>
             public sealed class OmlHeaderAttribute : Attribute
             {
+                /// <summary>
+                /// Whether the attribute is read-only.
+                /// </summary>
                 public bool IsReadOnly;
             }
         }

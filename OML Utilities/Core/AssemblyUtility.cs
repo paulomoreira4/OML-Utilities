@@ -17,8 +17,8 @@ namespace OmlUtilities.Core
         /// Loads an assembly by its assembly name.
         /// Takes into account the current platform version.
         /// </summary>
-        /// <param name="assemblyName"></param>
-        /// <returns></returns>
+        /// <param name="assemblyName">Name of the assembly to be loaded.</param>
+        /// <returns>Loaded assembly.</returns>
         public static Assembly GetAssembly(string assemblyName)
         {
             string dllName = assemblyName + ".dll";
@@ -83,12 +83,25 @@ namespace OmlUtilities.Core
             }
         }
 
+        /// <summary>
+        /// Returns the type of an assembly by name.
+        /// </summary>
+        /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="typeName">Name of the type of the assembly.</param>
+        /// <returns>Assembly type.</returns>
         public static Type GetAssemblyType(string assemblyName, string typeName)
         {
             Assembly assembly = GetAssembly(assemblyName);
             return assembly.GetType(typeName, true);
         }
         
+        /// <summary>
+        /// Returns the value of an instance field.
+        /// </summary>
+        /// <typeparam name="T">Type of the returned object.</typeparam>
+        /// <param name="assemblyInstance">Assembly instance object.</param>
+        /// <param name="fieldName">Name of the field to be fetched.</param>
+        /// <returns>Value of the fetched field.</returns>
         public static T GetInstanceField<T>(object assemblyInstance, string fieldName)
         {
             Type assemblyType = assemblyInstance.GetType();
@@ -96,6 +109,12 @@ namespace OmlUtilities.Core
             return (T)assemblyType.InvokeMember(fieldName, flags, null, assemblyInstance, null);
         }
 
+        /// <summary>
+        /// Sets the value of an instance field.
+        /// </summary>
+        /// <param name="assemblyInstance">Assembly instance object.</param>
+        /// <param name="fieldName">Name of the field to be set.</param>
+        /// <param name="value">Value to be assigned to the field.</param>
         public static void SetInstanceField(object assemblyInstance, string fieldName, object value)
         {
             Type assemblyType = assemblyInstance.GetType();
@@ -104,6 +123,14 @@ namespace OmlUtilities.Core
             propertyInfo.SetValue(assemblyInstance, value, null);
         }
 
+        /// <summary>
+        /// Executes an instance method.
+        /// </summary>
+        /// <typeparam name="T">Type of the returned object.</typeparam>
+        /// <param name="assemblyInstance">Assembly instance object.</param>
+        /// <param name="methodName">Name of the method to be executed.</param>
+        /// <param name="args">Method arguments list.</param>
+        /// <returns>Result of the executed instance method.</returns>
         public static T ExecuteInstanceMethod<T>(object assemblyInstance, string methodName, object[] args = null)
         {
             Type assemblyType = assemblyInstance.GetType();
@@ -125,7 +152,7 @@ namespace OmlUtilities.Core
         /// </summary>
         /// <param name="assembly">Assembly of the program.</param>
         /// <param name="dllName">Name of the DLL.</param>
-        /// <returns></returns>
+        /// <returns>Resource name of the assembly.</returns>
         private static string _GetAssemblyResourceName(Assembly assembly, string dllName)
         {
             return assembly.GetManifestResourceNames().FirstOrDefault(rn => rn.EndsWith(dllName));

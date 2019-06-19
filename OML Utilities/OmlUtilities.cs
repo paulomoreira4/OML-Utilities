@@ -9,22 +9,6 @@ using System.Xml.Linq;
 using static OmlUtilities.Core.Oml;
 using static OmlUtilities.Core.Oml.OmlHeader;
 
-/*
-
-OML Utilities
-
-Usage: oml [options] [-i infile] [-o outfile]
-
-Options:
-    -i infile       Sets the input file. It is possible to read from stdin
-                    instead of a file by using UNIX pipe access syntax
-                    (e.g.: '-i pipe:').
-    -o outfile      Sets the output file. It is possible to write to stdout
-                    instead of writing to a file by using UNIX pipe access
-                    syntax (e.g.: '-o pipe:').
-
- */
-
 namespace OmlUtilities
 {
     public class OmlUtilities
@@ -92,17 +76,21 @@ namespace OmlUtilities
             [Option(Description = "Whether only the latest compatible version should be shown.",
             LongName = "latest",
             ShortName = "l")]
-            bool onlyLatest)
+            bool onlyLatest = false,
+            [Option(Description = "Whether to show the full formatted version (e.g. '9.1.603.0' instead of 'O9.1').",
+            LongName = "fullversion",
+            ShortName = "v")]
+            bool showFullVersion = false)
         {
             if (onlyLatest)
             {
-                Console.WriteLine(PlatformVersion.LatestSupportedVersion);
+                Console.WriteLine(showFullVersion ? PlatformVersion.LatestSupportedVersion.Version.ToString() : PlatformVersion.LatestSupportedVersion.ToString());
             }
             else
             {
                 foreach (PlatformVersion version in PlatformVersion.Versions)
                 {
-                    Console.WriteLine(version);
+                    Console.WriteLine(showFullVersion ? version.Version.ToString() : version.ToString());
                 }
             }
         }
@@ -168,7 +156,7 @@ namespace OmlUtilities
             }
             else
             {
-                XElement fragment = oml.GetFragment(fragmentName);
+                XElement fragment = oml.GetFragmentXml(fragmentName);
 
                 if (fragment == null)
                 {
@@ -270,7 +258,7 @@ namespace OmlUtilities
                     }
 
                     XElement fragment = XElement.Parse(fragmentLine.Substring(colonIndex + 1));
-                    oml.SetFragment(fragmentName, fragment);
+                    oml.SetFragmentXml(fragmentName, fragment);
                 }
             }
 
@@ -279,7 +267,7 @@ namespace OmlUtilities
             if (format != null && format.Equals("xml", StringComparison.InvariantCultureIgnoreCase) || format == null && output.EndsWith(".xml", StringComparison.InvariantCultureIgnoreCase))
             {
                 StreamWriter sw = new StreamWriter(outputStream);
-                sw.Write(oml.GetXML().ToString(SaveOptions.DisableFormatting)); // Export XML
+                sw.Write(oml.GetXml().ToString(SaveOptions.DisableFormatting)); // Export XML
                 sw.Flush();
                 sw.Close();
             }

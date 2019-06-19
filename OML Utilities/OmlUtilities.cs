@@ -109,7 +109,7 @@ namespace OmlUtilities
         public void ShowHeaders(
             [Argument(Description = "Path to the OML file to be loaded. It is possible to read from stdin instead of a file by using UNIX pipe access syntax (e.g.: 'pipe:').")]
             string input,
-            [Argument(Description = "Target platform version to use for loading the OML file.")]
+            [Argument(Description = "Target platform version to use for loading the OML file. For the latest compatible version, use the value 'OL'.")]
             string version,
             [Argument(Description = "If set, returns only the value of the specified header.")]
             string headerName = null)
@@ -149,7 +149,7 @@ namespace OmlUtilities
         public void ShowFragments(
             [Argument(Description = "Path to the OML file to be loaded. It is possible to read from stdin instead of a file by using UNIX pipe access syntax (e.g.: 'pipe:').")]
             string input,
-            [Argument(Description = "Target platform version to use for loading the OML file.")]
+            [Argument(Description = "Target platform version to use for loading the OML file. For the latest compatible version, use the value 'OL'.")]
             string version,
             [Argument(Description = "If set, prints the XML content of the desired fragment.")]
             string fragmentName = null)
@@ -183,7 +183,7 @@ namespace OmlUtilities
             string input,
             [Argument(Description = "Destination path to save the manipulated OML file. It is possible to send the data stream to stdout instead by using UNIX pipe access syntax (e.g.: 'pipe:').")]
             string output,
-            [Argument(Description = "Target platform version to use for loading the OML file.")]
+            [Argument(Description = "Target platform version to use for loading the OML file. For the latest compatible version, use the value 'OL'.")]
             string version,
             [Option(Description = "Destination file format. Possible formats are 'oml' and 'xml'. If not set, will be guessed according to the output file extension.",
             LongName = "format",

@@ -12,9 +12,7 @@ In the command line, the platform version starts with the letter "O" followed th
 
 ## Usage Examples
 
-The examples below have <PlatformVersion> tags which must be replaced with the appropriate platform version.
-
-### Exporting OML as XML
+### Export OML as XML
 
 ```
 oml Manipulate "<InputFilePath>" "<OutputFilePath>" <PlatformVersion> --format xml
@@ -46,7 +44,7 @@ Optionally, the `--latest` flag can be added as well for outputting only the hig
 oml ShowPlatformVersions --fullversion --latest
 ```
 
-### Showing header values
+### Show header values
 
 ```
 oml ShowHeaders "<InputFilePath>" "<OutputFilePath>" <PlatformVersion>
@@ -58,13 +56,13 @@ Shows a list of headers and their respective values separated by comma (:). If d
 oml ShowHeaders "C:\MyModule.oml" O11 Name
 ```
 
-### Changing header values
+### Change header values
 
 ```
 oml Manipulate "<InputFilePath>" "<OutputFilePath>" <PlatformVersion> -H "<HeaderName>:<HeaderValue>"
 ```
 
-Changes the value of one or more headers.
+Changes the value of one or more headers. Some headers are read-only and cannot be modified.
 
 Multiple headers can be modified at once by repeating the `-H` option, e.g.:
 

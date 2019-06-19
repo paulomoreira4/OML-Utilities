@@ -65,8 +65,17 @@ namespace OmlUtilities
             {
                 throw new Exception("The platform version argument is mandatory.");
             }
-            PlatformVersion platformVersion = PlatformVersion.Versions.FirstOrDefault(p => p.Label.Equals(version.ToUpper()));
-            AssemblyUtility.PlatformVersion = platformVersion ?? throw new Exception("Platform version \"" + version + "\" not recognized. Please run ShowPlatformVersions in order to list supported versions.");
+
+            if (version.Equals("OL", StringComparison.InvariantCultureIgnoreCase))
+            {
+                AssemblyUtility.PlatformVersion = PlatformVersion.LatestSupportedVersion;
+            }
+            else
+            {
+                PlatformVersion platformVersion = PlatformVersion.Versions.FirstOrDefault(p => p.Label.Equals(version, StringComparison.InvariantCultureIgnoreCase));
+                AssemblyUtility.PlatformVersion = platformVersion ?? throw new Exception("Platform version \"" + version + "\" not recognized. Please run ShowPlatformVersions in order to list supported versions.");
+            }
+
             return new Oml(_GetStream(input, true));
         }
 

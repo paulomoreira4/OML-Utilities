@@ -64,7 +64,7 @@ oml ShowHeaders "C:\MyModule.oml" O11 Name
 oml Manipulate "<InputFilePath>" "<OutputFilePath>" <PlatformVersion> -H "<HeaderName>:<HeaderValue>"
 ```
 
-Changes the value of one or more headers.
+Changes the value of one or more headers. Some headers are read-only and cannot be modified.
 
 Multiple headers can be modified at once by repeating the `-H` option, e.g.:
 

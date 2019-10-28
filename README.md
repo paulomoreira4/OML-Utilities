@@ -85,3 +85,19 @@ Multiple fragments can be modified at once by repeating the `-F` option, e.g.:
 ```
 oml Manipulate "C:\MyModule.oml" "C:\MyModule_Edited.oml" O11 -F "FragmentName1:<MyXmlContent1 />" -F "FragmentName2:<MyXmlContent2 />"
 ```
+
+### OML Text Search
+
+```
+oml TextSearch "<InputDirectory>" "<Keyword>" <PlatformVersion>
+```
+
+Perform a text search inside a OML (eSpace) over all OML files in a specified directory. Ideal for find uses of Built-function or something else.
+
+The search result will be displayed in console terminal. 
+
+Notice that the search is a case sensitive.
+
+```
+oml TextSearch "C:\omldir" "TextToSearch" O11
+```

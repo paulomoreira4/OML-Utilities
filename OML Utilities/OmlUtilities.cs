@@ -305,5 +305,79 @@ namespace OmlUtilities
 
             outputStream.Close();
         }
+
+
+        [ApplicationMetadata(Description = "Search for a text inside an OML file.",
+        ExtendedHelpText = "Perform a textual search for any expression inside an OML file.")]
+        public void TextSearch(
+            [Argument(Description = "Path to the directory with OML files to be examined.")]
+            string omlPathDir,
+            [Argument(Description = "Text to be searched inside an OML file.")]
+            string keywordSearch,
+            [Argument(Description = "Target platform version to use for loading the OML file. For the latest compatible version, use the value 'OL'.")]
+            string version)
+        {
+
+            if (String.IsNullOrEmpty(keywordSearch)) {
+                Console.WriteLine("Please inform a expression for search and try again.");
+            }
+            else
+            {
+                Console.WriteLine("Search for keyword '{0}'", keywordSearch);
+            }
+
+
+            if (Directory.Exists(omlPathDir))
+            {
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+
+                Console.WriteLine("Search OMLs inside of {0} ...", omlPathDir);
+
+                DirectoryInfo omlDir = new DirectoryInfo(omlPathDir);
+                FileInfo[] Files = omlDir.GetFiles("*.oml");
+
+                Console.WriteLine("{0} files found.", Files.Count());
+
+                int CountFile = 0;
+                foreach (FileInfo file in Files)
+                {
+
+                    Oml oml = _GetOmlInstance(omlPathDir+Path.DirectorySeparatorChar+file, version);
+                    String txtXml = oml.GetXml().ToString();
+
+                    int i = 0;
+                    int count = 0;
+                    while ((i = txtXml.IndexOf(keywordSearch, i)) != -1) {
+                        i += keywordSearch.Length;
+                        count++;
+
+                    }
+
+                    CountFile++;
+
+                    Console.WriteLine("[{0}/{1}] - {2} ocurrences found in {3}.", CountFile, Files.Count() ,count, file);
+                }
+
+                watch.Stop();
+                TimeSpan ElapsedMS = TimeSpan.FromMilliseconds(watch.ElapsedMilliseconds);
+                string formatElapsedTime = string.Format("{0:D2}h:{1:D2}m:{2:D2}s",
+                        ElapsedMS.Hours,
+                        ElapsedMS.Minutes,
+                        ElapsedMS.Seconds);
+
+                Console.WriteLine("Elapsed time of {0}", formatElapsedTime);
+
+            }
+            else
+                Console.WriteLine("Directory not found.");
+
+
+
+
+
+
+
+
+        }
     }
 }
